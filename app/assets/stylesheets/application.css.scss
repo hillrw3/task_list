@@ -14,3 +14,12 @@
  *= require bootstrap
  *= require_tree .
  */
+
+.small-container {
+  width: 20%;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}

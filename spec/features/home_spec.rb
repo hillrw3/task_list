@@ -8,11 +8,12 @@ describe 'Home', js: true do
     expect(page).to have_content 'Task List'
   end
 
-  it 'has a responsive input and output' do
+  it 'can add a new task to a list' do
     expect(page).to have_no_content 'shazam!'
     fill_in 'new_task', with: 'shazam!'
+    page.find('#add_task').click
 
-    within  ('#test_output') do
+    within  ('#task_list') do
       expect(page).to have_content 'shazam!'
     end
   end
