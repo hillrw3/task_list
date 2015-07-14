@@ -1,4 +1,4 @@
 //= require_self
 //= require_tree ./controllers
 
-angular.module('taskApp', []);
+angular.module('taskApp', ['ngResource']);

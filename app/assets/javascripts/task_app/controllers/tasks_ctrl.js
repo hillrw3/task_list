@@ -1,11 +1,13 @@
-angular.module('taskApp').controller('tasksCtrl', ['$scope', function ($scope) {
+angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($scope, Task) {
     $scope.newTask = '';
     $scope.taskList = [];
 
     $scope.addTask = function addTask() {
       if($scope.newTask != '') {
-        $scope.taskList.push($scope.newTask);
-        $scope.newTask = '';
+        Task.save({description: $scope.newTask}).$promise.then(function(data) {
+          $scope.taskList.push($scope.newTask);
+          $scope.newTask = '';
+        });
       }
     };
 

@@ -1,12 +1,13 @@
 describe('TasksCtrl', function () {
-  var $scope, $controller;
+  var $scope, $controller, Task;
 
   beforeEach(module('taskApp'));
 
-  beforeEach(inject(function (_$rootScope_, _$controller_) {
+  beforeEach(inject(function (_$rootScope_, _$controller_, _Task_) {
     $scope = _$rootScope_.$new();
     $controller = _$controller_;
     $controller('tasksCtrl', {$scope: $scope});
+    Task = _Task_;
   }));
 
 
@@ -22,6 +23,14 @@ describe('TasksCtrl', function () {
       $scope.newTask = '';
       $scope.addTask();
       expect($scope.taskList).toEqual([]);
+    });
+
+    it('adds the task to the database', function() {
+      spyOn(Task, 'save');
+      $scope.newTask = 'new task';
+      $scope.addTask();
+
+      expect(Task.save).toHaveBeenCalled();
     });
   });
 

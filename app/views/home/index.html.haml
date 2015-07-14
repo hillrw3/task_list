@@ -1,7 +1,7 @@
 %div.text-center(ng-controller='tasksCtrl')
   %h2 Task List
   %input#new-task(ng-model='newTask')
-  %button.glyphicon.glyphicon-plus#add_task(ng-click='addTask()')
+  %button.glyphicon.glyphicon-plus#add-task(ng-click='addTask()')
   %br
   %br
   %ul.list-unstyled.text-left.small-container.col-centered#task-list(ng-repeat='task in taskList')
