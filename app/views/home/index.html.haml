@@ -1,6 +1,10 @@
 %div.text-center(ng-controller='tasksCtrl')
   %h2 Task List
-  %input#new_task(ng-model='newTask')
+  %input#new-task(ng-model='newTask')
   %button.glyphicon.glyphicon-plus#add_task(ng-click='addTask()')
-  %ul.text-left.small-container.col-centered#task_list(ng-repeat='task in taskList')
-    %li {{task}}
+  %br
+  %br
+  %ul.list-unstyled.text-left.small-container.col-centered#task-list(ng-repeat='task in taskList')
+    %li
+      %span {{task}}
+      %span.label.label-warning.pull-right#remove-task(ng-click='removeTask(task)') Remove

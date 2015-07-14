@@ -8,5 +8,12 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', function ($scope) {
         $scope.newTask = '';
       }
     };
+
+    $scope.removeTask = function removeTask(task) {
+      var index = $scope.taskList.indexOf(task);
+      if (index > -1) {
+        $scope.taskList.splice(index, 1);
+      }
+    }
   }]
 );

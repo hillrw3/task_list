@@ -23,5 +23,13 @@ describe('TasksCtrl', function () {
       $scope.addTask();
       expect($scope.taskList).toEqual([]);
     });
+  });
+
+  describe('removeTask', function() {
+    it('removes the task from the taskList', function() {
+      $scope.taskList = ['Im temporary'];
+      $scope.removeTask('Im temporary');
+      expect($scope.taskList).toEqual([])
+    })
   })
 });
