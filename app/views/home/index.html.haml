@@ -6,5 +6,5 @@
   %br
   %ul.list-unstyled.text-left.small-container.col-centered#task-list(ng-repeat='task in taskList')
     %li
-      %span {{task}}
+      %span {{ task.description }}
       %span.label.label-warning.pull-right#remove-task(ng-click='removeTask(task)') Remove

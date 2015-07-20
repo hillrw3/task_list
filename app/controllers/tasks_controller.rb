@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
   respond_to :json
 
+  def index
+    respond_with Task.all
+  end
+
   def create
     task = Task.new(task_params)
-    task.save
-    render nothing: true
+    render json: TaskPresenter.new(task)
   end
 
   private

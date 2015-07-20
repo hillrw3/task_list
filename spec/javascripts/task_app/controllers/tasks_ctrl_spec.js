@@ -1,13 +1,20 @@
 describe('TasksCtrl', function () {
-  var $scope, $controller, Task;
+  var $scope, $controller, Task, deferred;
 
   beforeEach(module('taskApp'));
 
-  beforeEach(inject(function (_$rootScope_, _$controller_, _Task_) {
+  beforeEach(inject(function (_$rootScope_, _$controller_, _Task_, $q) {
     $scope = _$rootScope_.$new();
     $controller = _$controller_;
     $controller('tasksCtrl', {$scope: $scope});
     Task = _Task_;
+
+    Task = {
+      save: function () {
+        deferred = $q.defer();
+        return {$promise: deferred.promise};
+      }
+    };
   }));
 
 
@@ -16,6 +23,9 @@ describe('TasksCtrl', function () {
       expect($scope.taskList).toEqual([]);
       $scope.newTask = 'new task';
       $scope.addTask();
+      deferred.resolve({new: 'task'});
+      $scope.$digest();
+
       expect($scope.taskList).toEqual(['new task']);
     });
 
@@ -26,7 +36,7 @@ describe('TasksCtrl', function () {
     });
 
     it('adds the task to the database', function() {
-      spyOn(Task, 'save');
+      spyOn(Task, 'save').and.callThrough();
       $scope.newTask = 'new task';
       $scope.addTask();
 
