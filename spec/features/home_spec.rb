@@ -19,11 +19,15 @@ describe 'Home', js: true do
   end
 
   it 'can remove a task from the list' do
+    Task.destroy_all
     expect(page).to have_no_content 'shazam!'
     fill_in 'new-task', with: 'shazam!'
     page.find('#add-task').click
 
     page.find('#remove-task').click
+    sleep 0.5
+
     expect(page).to have_no_content 'shazam!'
+    expect(Task.count).to eq 0
   end
 end

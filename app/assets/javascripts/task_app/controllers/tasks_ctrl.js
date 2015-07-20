@@ -15,10 +15,12 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($
     };
 
     $scope.removeTask = function removeTask(task) {
-      var index = $scope.taskList.indexOf(task);
-      if (index > -1) {
-        $scope.taskList.splice(index, 1);
-      }
+      Task.delete({id: task.id}).$promise.then(function() {
+        var index = $scope.taskList.indexOf(task);
+        if (index > -1) {
+          $scope.taskList.splice(index, 1);
+        }
+      })
     }
   }]
 );
