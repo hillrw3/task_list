@@ -5,12 +5,14 @@
   %br
   %br
   %div.small-container.col-centered
-    %table.table.table-hover.table-nonfluid.text-left#task-list
-      %tbody
-        %th Started {{taskList.length}}
-        %tr(ng-repeat='task in taskList')
-          %td
-            %span {{ task.description }}
-            %span.label.label-success.pull-right#remove-task(ng-click='finishTask(task)') Finish
-
-
+    %accordion
+      %accordion-group(is-open='true')
+        %accordion-heading
+          %span Started
+          %span.badge {{taskList.length}}
+        %table.table.table-hover.text-left#task-list
+          %tbody
+            %tr(ng-repeat='task in taskList')
+              %td#started-tasks
+                %span {{ task.description }}
+                %span.label.label-success.pull-right#remove-task(ng-click='finishTask(task)') Finish
