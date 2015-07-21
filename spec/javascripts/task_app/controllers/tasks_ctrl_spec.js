@@ -1,18 +1,23 @@
 describe('TasksCtrl', function () {
-  var $scope, $controller, Task, deferred;
+  var $scope, $controller, Task, deferred, queryDeferred, $q;
 
   beforeEach(module('taskApp'));
 
-  beforeEach(inject(function (_$rootScope_, _$controller_, _Task_, $q) {
+  beforeEach(inject(function (_$rootScope_, _$controller_, _Task_, _$q_) {
     $scope = _$rootScope_.$new();
     $controller = _$controller_;
-    $controller('tasksCtrl', {$scope: $scope});
+    $controller('tasksCtrl', {$scope: $scope, Task: Task});
+    $q = _$q_;
     Task = _Task_;
 
     Task = {
       save: function () {
         deferred = $q.defer();
         return {$promise: deferred.promise};
+      },
+      query: function () {
+        queryDeferred = $q.defer();
+        return {$promise: queryDeferred.promise};
       }
     };
   }));

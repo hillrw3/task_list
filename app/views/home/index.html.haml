@@ -4,7 +4,13 @@
   %button.glyphicon.glyphicon-plus#add-task(ng-click='addTask()')
   %br
   %br
-  %ul.list-unstyled.text-left.small-container.col-centered#task-list(ng-repeat='task in taskList')
-    %li
-      %span {{ task.description }}
-      %span.label.label-warning.pull-right#remove-task(ng-click='removeTask(task)') Finish
+  %div.small-container.col-centered
+    %table.table.table-hover.table-nonfluid.text-left#task-list
+      %tbody
+        %th Started {{taskList.length}}
+        %tr(ng-repeat='task in taskList')
+          %td
+            %span {{ task.description }}
+            %span.label.label-success.pull-right#remove-task(ng-click='finishTask(task)') Finish
+
+

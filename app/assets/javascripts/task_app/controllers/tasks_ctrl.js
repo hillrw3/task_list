@@ -14,8 +14,8 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($
       }
     };
 
-    $scope.removeTask = function removeTask(task) {
-      Task.delete({id: task.id}).$promise.then(function() {
+    $scope.finishTask = function finishTask(task) {
+      Task.finish({id: task.id}).$promise.then(function() {
         var index = $scope.taskList.indexOf(task);
         if (index > -1) {
           $scope.taskList.splice(index, 1);

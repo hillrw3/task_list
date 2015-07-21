@@ -11,7 +11,7 @@ describe TasksController do
 
   describe '#index' do
     it 'retrieves all the tasks' do
-      Task.create(description: 'new task')
+      create_task
       xhr :get, :index, format: :json
       json_response = JSON.parse(response.body)
 
@@ -21,10 +21,26 @@ describe TasksController do
 
   describe '#destroy' do
     it 'deletes the given task' do
-      task = Task.create(description: 'new task')
+      task = create_task
       xhr :delete, :destroy, id: task.id
 
       expect(Task.count).to eq 0
     end
+  end
+
+  describe '#finish' do
+    it 'marks the task as finished' do
+      task = create_task
+      xhr :patch, :finish, id: task.id
+      task.reload
+
+      expect(task.status).to eq 'finished'
+    end
+  end
+
+  private
+
+  def create_task
+    Task.create(description: 'new task')
   end
 end

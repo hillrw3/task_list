@@ -17,6 +17,12 @@ class TasksController < ApplicationController
     render nothing: true
   end
 
+  def finish
+    task = Task.find(params[:id])
+    task.update_attributes(status: 'finished')
+    render json: TaskPresenter.new(task)
+  end
+
   private
 
   def task_params
