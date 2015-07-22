@@ -20,7 +20,7 @@ describe TasksController do
 
     it 'retrieves and categorizes the tasks' do
       create_task
-      Task.create(description: 'finished task', status: 1)
+      create_task(status: 1)
       xhr :get, :index, format: :json
       json_response = JSON.parse(response.body)
 
@@ -46,11 +46,5 @@ describe TasksController do
 
       expect(task.status).to eq 'finished'
     end
-  end
-
-  private
-
-  def create_task
-    Task.create(description: 'new task')
   end
 end
