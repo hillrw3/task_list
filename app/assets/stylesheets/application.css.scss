@@ -13,10 +13,14 @@
   margin: 0 auto;
 }
 
-#remove-task {
+#tasks-title {
+  padding: 10px;
+}
+
+.clickable {
   cursor: pointer;
 }
 
-#tasks-title {
-  padding: 10px;
+.table-hover {
+  margin: 0 !important;
 }

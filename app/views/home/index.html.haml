@@ -1,18 +1,30 @@
-%div.text-center(ng-controller='tasksCtrl')
+%div.text-center(ng-controller='tasksCtrl' ng-init='init()')
   %h2 Task List
-  %input#new-task(ng-model='newTask')
-  %button.glyphicon.glyphicon-plus#add-task(ng-click='addTask()')
-  %br
+  .input-group.small-container.col-centered
+    %input.form-control#new-task(ng-model='newTask')
+    .input-group-btn
+      %button.btn.btn-default#add-task(type='button' ng-click='addTask()') +
+
   %br
   %div.small-container.col-centered
-    %accordion
-      %accordion-group(is-open='true')
+    %accordion(close-others='false')
+      %accordion-group#started-tasks(is-open='true')
         %accordion-heading
           %span Started
-          %span.badge {{taskList.length}}
-        %table.table.table-hover.text-left#task-list
+          %span.badge {{startedTasks.length}}
+        %table.table.table-hover.text-left
           %tbody
-            %tr(ng-repeat='task in taskList')
-              %td#started-tasks
+            %tr(ng-repeat='task in startedTasks')
+              %td
                 %span {{ task.description }}
-                %span.label.label-success.pull-right#remove-task(ng-click='finishTask(task)') Finish
+                %span.label.label-success.pull-right.clickable#remove-task(ng-click='finishTask(task)') Finish
+      %accordion-group#finished-tasks
+        %accordion-heading
+          %span#finished-toggle Finished
+          %span.badge {{finishedTasks.length}}
+        %table.table.table-hover.text-left
+          %tbody
+            %tr(ng-repeat='task in finishedTasks')
+              %td
+                %span {{ task.description }}
+                %span.label.label-danger.pull-right.clickable#delete-task(ng-click='deleteTask(task)') Delete
