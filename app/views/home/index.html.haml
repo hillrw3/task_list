@@ -1,14 +1,14 @@
-%div.text-center(ng-controller='tasksCtrl' ng-init='init()')
-  %h2 Task List
+%div(ng-controller='tasksCtrl' ng-init='init()')
+  %h2.text-center Task List
   .input-group.small-container.col-centered
     %input.form-control#new-task(ng-model='newTask')
     .input-group-btn
       %button.btn.btn-default#add-task(type='button' ng-click='addTask()') +
 
   %br
-  %div.small-container.col-centered
+  %div
     %accordion(close-others='false')
-      %accordion-group#started-tasks(is-open='true')
+      %accordion-group.col-md-4.col-md-offset-2.no-padding.no-margin.primary-blue#started-tasks(is-open='true')
         %accordion-heading
           %span Started
           %span.badge {{startedTasks.length}}
@@ -18,7 +18,7 @@
               %td
                 %span {{ task.description }}
                 %span.label.label-success.pull-right.clickable#remove-task(ng-click='finishTask(task)') Finish
-      %accordion-group#finished-tasks
+      %accordion-group.col-md-4.no-padding.no-margin.success-green#finished-tasks
         %accordion-heading
           %span#finished-toggle Finished
           %span.badge {{finishedTasks.length}}
