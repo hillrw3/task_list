@@ -2,9 +2,7 @@ class TasksController < ApplicationController
   respond_to :json
 
   def index
-    tasks = get_and_categorize_tasks
-
-    respond_with tasks
+    respond_with categorized_tasks
   end
 
   def create
@@ -31,7 +29,11 @@ class TasksController < ApplicationController
     params.require(:task).permit(:description)
   end
 
-  def get_and_categorize_tasks
+  def categorized_tasks
+    categorize(presented_tasks)
+  end
+
+  def categorize(presented_tasks)
     categorized_tasks = {}
     presented_tasks.each do |task|
       status_key = task.status
@@ -41,6 +43,6 @@ class TasksController < ApplicationController
   end
 
   def presented_tasks
-    Task.all.each { |task|  TaskPresenter.new(task) }
+    @_presented_tasks ||= Task.all.each { |task|  TaskPresenter.new(task) }
   end
 end

@@ -16,8 +16,8 @@
           %tbody
             %tr(ng-repeat='task in startedTasks')
               %td
-                %span {{ task.description }}
                 %span.label.label-success.pull-right.clickable#remove-task(ng-click='finishTask(task)') Finish
+                %span {{ task.description }}
       %accordion-group.col-md-4.no-padding.no-margin.success-green#finished-tasks
         %accordion-heading
           %span#finished-toggle Finished
@@ -26,5 +26,5 @@
           %tbody
             %tr(ng-repeat='task in finishedTasks')
               %td
-                %span {{ task.description }}
                 %span.label.label-danger.pull-right.clickable#delete-task(ng-click='deleteTask(task)') Delete
+                %span {{ task.description }}
