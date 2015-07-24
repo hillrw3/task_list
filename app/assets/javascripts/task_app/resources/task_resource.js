@@ -6,6 +6,11 @@ angular.module('taskApp').factory('Task', ['$resource', function ($resource) {
       url: '/tasks/:id/finish',
       params: {id: '@id'}
     },
-    delete: {method: 'DELETE'}
+    delete: {method: 'DELETE'},
+    restart: {method: 'PATCH',
+      isArray: false,
+      url: '/tasks/:id/restart',
+      params: {id: '@id'}
+    }
   });
 }]);

@@ -35,6 +35,16 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($
           $scope.finishedTasks.splice(index, 1);
         }
       })
-    }
+    };
+
+    $scope.restartTask = function restartTask(task) {
+      Task.restart({id: task.id}).$promise.then(function(data) {
+        var index = $scope.finishedTasks.indexOf(task);
+        if (index > -1) {
+          $scope.finishedTasks.splice(index, 1);
+        }
+        $scope.startedTasks.push(task)
+      })
+    };
   }]
 );

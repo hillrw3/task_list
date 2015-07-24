@@ -47,4 +47,15 @@ describe TasksController do
       expect(task.status).to eq 'finished'
     end
   end
+
+  describe '#restart' do
+    it 'changes the status from finished to started' do
+      task = create_task(status: 'finished')
+      expect(task.status).to eq 'finished'
+      xhr :patch, :restart, id: task.id
+      task.reload
+
+      expect(task.status).to eq 'started'
+    end
+  end
 end

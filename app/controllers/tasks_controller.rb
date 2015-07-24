@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   respond_to :json
+  before_filter :find_task, only: [:destroy, :finish, :restart]
+  attr_accessor :task
 
   def index
     respond_with categorized_tasks
@@ -12,28 +14,35 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
     task.destroy
     render nothing: true
   end
 
   def finish
-    task = Task.find(params[:id])
     task.update_attributes(status: 'finished')
     render json: TaskPresenter.new(task)
   end
 
+  def restart
+    task.update_attributes(status: 'started')
+    render json: TaskPresenter.new(task)
+  end
+
   private
+
+  def find_task
+    @task ||= Task.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:description)
   end
 
   def categorized_tasks
-    categorize(presented_tasks)
+    categorize_by_status(presented_tasks)
   end
 
-  def categorize(presented_tasks)
+  def categorize_by_status(presented_tasks)
     categorized_tasks = {}
     presented_tasks.each do |task|
       status_key = task.status
