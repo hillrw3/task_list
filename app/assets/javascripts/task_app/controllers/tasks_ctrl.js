@@ -1,7 +1,7 @@
 angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($scope, Task) {
 
     $scope.init = function init() {
-      $scope.newTask = '';
+      $scope.newTask = {description: ''};
 
       Task.query().$promise.then(function(data) {
         $scope.startedTasks = data.started || [];
@@ -10,10 +10,11 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($
     };
 
     $scope.addTask = function addTask() {
-      if($scope.newTask != '') {
-        Task.save({description: $scope.newTask}).$promise.then(function(data) {
+      debugger;
+      if($scope.newTask.description!= '') {
+        Task.save({description: $scope.newTask.description}).$promise.then(function(data) {
           $scope.startedTasks.push(data);
-          $scope.newTask = '';
+          $scope.newTask.description = '';
         });
       }
     };

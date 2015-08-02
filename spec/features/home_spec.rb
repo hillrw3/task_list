@@ -26,6 +26,8 @@ describe 'Home', js: true do
       expect(page).to have_no_content 'shazam!'
     end
 
+    page.find('#finished-toggle').click
+
     within('#finished-tasks') do
       expect(page).to have_content 'shazam!'
     end
@@ -34,6 +36,8 @@ describe 'Home', js: true do
   it 'can restart a task' do
     create_task(description: 'learn to moonwalk', status: 'finished')
     visit '/'
+
+    page.find('#finished-toggle').click
 
     within('#finished-tasks') do
       expect(page).to have_content 'learn to moonwalk'
