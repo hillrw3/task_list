@@ -18,10 +18,18 @@ describe UsersController do
 
   describe 'POST #create' do
     describe 'on success' do
+      let(:user_params) { {email: 'bart@simpson.com', username: 'el bart', password: 'iamsecure', password_confirmation: 'iamsecure'} }
+
       it 'creates a user' do
-        post :create, user: {email: 'bart@simpson.com', username: 'el bart', password: 'iamsecure', password_confirmation: 'iamsecure'}
+        post :create, user:user_params
 
         expect(User.last.username).to eq 'el bart'
+      end
+
+      it 'creates a session for the new user' do
+        post :create, user:user_params
+
+        expect(session.empty?).to be_falsey
       end
     end
 
@@ -30,6 +38,14 @@ describe UsersController do
         post :create, user: {email: 'bart@simpson.com', username: 'el bart', password: 'iamsecure', password_confirmation: 'wrong'}
 
         expect(assigns(:user).errors.messages[:password_confirmation]).to_not be_nil
+      end
+
+      it 'returns errors for required fields' do
+        post :create, user: {email: '', username: '', password: '', password_confirmation: ''}
+
+        expect(assigns(:user).errors.messages[:email]).to_not be_nil
+        expect(assigns(:user).errors.messages[:username]).to_not be_nil
+        expect(assigns(:user).errors.messages[:password]).to_not be_nil
       end
     end
 
