@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :tasks, only: [:create, :index, :destroy]
   patch '/tasks/:id/finish' => 'tasks#finish'
   patch '/tasks/:id/restart' => 'tasks#restart'
+
+  resources :users, only: [:new, :create]
 end

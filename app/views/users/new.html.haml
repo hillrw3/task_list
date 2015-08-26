@@ -1,0 +1,10 @@
+.text-center
+  %h3 Sign up
+
+  #registration-form.col-md-6.col-md-offset-3.well
+    = simple_form_for @user do |f|
+      = f.input :email
+      = f.input :username
+      = f.input :password
+      = f.input :password_confirmation, label: 'Password Confirmation'
+      = f.button :button, 'Register', class: 'btn-warning'

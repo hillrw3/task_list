@@ -1,4 +1,5 @@
 %h2.text-center Task List
+.btn.btn-default.pull-right= link_to 'Sign up', new_user_path
 
 %div(ng-controller='tasksCtrl' ng-init='init()')
   %accordion
