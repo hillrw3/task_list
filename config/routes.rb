@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   patch '/tasks/:id/restart' => 'tasks#restart'
 
   resources :users, only: [:new, :create]
+  devise_for :users
 end
