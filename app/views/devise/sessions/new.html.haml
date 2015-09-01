@@ -10,7 +10,9 @@
       = f.password_field :password, class: 'form-control', placeholder: 'Password'
     .form-group
       = f.submit "Sign in", class: 'btn btn-primary col-md-12'
-  .btn.btn-link.pull-right= link_to 'Sign up', new_user_path
+  %p.col-md-12.bg-danger= alert
+  .sign-up.col-md-12
+    .btn.btn-link.pull-right.no-padding= link_to 'Sign up', new_user_path
 
 %div(ng-controller='tasksCtrl' ng-init='init()')
   %accordion
