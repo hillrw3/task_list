@@ -10,7 +10,6 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($
     };
 
     $scope.addTask = function addTask() {
-      debugger;
       if($scope.newTask.description!= '') {
         Task.save({description: $scope.newTask.description}).$promise.then(function(data) {
           $scope.startedTasks.push(data);

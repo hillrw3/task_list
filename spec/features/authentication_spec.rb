@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User Authentication', js: true do
 
   context 'User Registration' do
-    it 'lets a new user register' do
+    it 'allows a new user register' do
       visit '/'
 
       click_on 'Sign up'
@@ -19,6 +19,22 @@ describe 'User Authentication', js: true do
       end
 
       expect(User.last.username).to eq 'user1'
+      expect(current_path).to eq root_path
+    end
+
+    it 'allows an existing user to sign in' do
+      create_user(username: 'user1')
+      visit '/'
+
+      within '#login' do
+        expect(page).to have_content 'Sign in'
+        fill_in 'Username', with: 'user1'
+        fill_in 'user[password]', with: 'password1'
+        click_on 'Sign in'
+      end
+
+      sleep 0.5
+
       expect(current_path).to eq root_path
     end
   end
