@@ -6,7 +6,7 @@ module ObjectCreation
   end
 
   def create_user(options={})
-    attributes = {username: "user_#{rand(1000)}", email: 'user@example.com', password: 'password1'}.merge(options)
+    attributes = {username: "user#{rand(1000)}", email: "user#{rand(1000)}@example.com", password: 'password1'}.merge(options)
     User.create(attributes)
   end
 

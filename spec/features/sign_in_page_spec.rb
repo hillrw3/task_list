@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Home', js: true do
+describe 'Sign in Page', js: true do
   before do
     visit '/'
   end

@@ -1,0 +1,9 @@
+.container-fluid.no-padding
+  %nav.navbar.navbar-default
+    .container
+      .navbar-header
+        %a.navbar-brand TaskList
+      .navbar-right
+        %ul.navbar-nav.nav
+          %li
+            = link_to 'Log out', destroy_user_session_path, method: :delete
