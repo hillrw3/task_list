@@ -9,4 +9,14 @@ module ObjectCreation
     attributes = {username: "user_#{rand(1000)}", email: 'user@example.com', password: 'password1'}.merge(options)
     User.create(attributes)
   end
+
+  def sign_in(username, password)
+    visit '/'
+
+    within '#login' do
+      fill_in 'Username', with: username
+      fill_in 'user[password]', with: password
+      click_on 'Sign in'
+    end
+  end
 end

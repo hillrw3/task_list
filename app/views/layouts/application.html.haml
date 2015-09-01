@@ -6,7 +6,18 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    .container
+    .container-fluid.no-padding
+      %nav.navbar.navbar-default
+        .container
+          .navbar-header
+            %a.navbar-brand TaskList
+          .navbar-right
+            %ul.navbar-nav.nav
+              %li
+                = link_to 'Log out', destroy_user_session_path, method: :delete
+
+    - if notice
       %p.notice= notice
+    -if alert
       %p.alert= alert
-      = yield
+    = yield
