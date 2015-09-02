@@ -10,7 +10,7 @@ module ObjectCreation
     User.create(attributes)
   end
 
-  def sign_in(username, password)
+  def sign_in_user(username, password)
     visit '/'
 
     within '#login' do

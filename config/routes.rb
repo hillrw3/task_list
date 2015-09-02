@@ -4,10 +4,12 @@ Rails.application.routes.draw do
 
   resource :session, only: :create
 
-  resources :tasks, only: [:create, :index, :destroy]
+  resources :tasks, only: [:create, :destroy]
   patch '/tasks/:id/finish' => 'tasks#finish'
   patch '/tasks/:id/restart' => 'tasks#restart'
 
   resources :users, only: [:new, :create]
   devise_for :users, controllers: { sessions: 'sessions'}
+
+  resources :lists, only: :index
 end

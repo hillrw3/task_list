@@ -3,10 +3,6 @@ class TasksController < ApplicationController
   before_filter :find_task, only: [:destroy, :finish, :restart]
   attr_accessor :task
 
-  def index
-    respond_with categorized_tasks
-  end
-
   def create
     task = Task.new(task_params)
     task.save
@@ -36,22 +32,5 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:description)
-  end
-
-  def categorized_tasks
-    categorize_by_status(presented_tasks)
-  end
-
-  def categorize_by_status(presented_tasks)
-    categorized_tasks = {}
-    presented_tasks.each do |task|
-      status_key = task.status
-      categorized_tasks.has_key?(status_key) ? categorized_tasks[status_key] << task : categorized_tasks[status_key] = [task]
-    end
-    categorized_tasks
-  end
-
-  def presented_tasks
-    @_presented_tasks ||= Task.all.each { |task|  TaskPresenter.new(task) }
   end
 end

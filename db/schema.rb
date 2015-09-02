@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826010423) do
+ActiveRecord::Schema.define(version: 20150902034531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "task_lists", force: true do |t|
-    t.string "name"
+  create_table "lists", force: true do |t|
+    t.string  "name"
+    t.integer "user_id"
   end
 
   create_table "tasks", force: true do |t|
     t.text    "description"
-    t.integer "status",       default: 0
-    t.integer "task_list_id"
+    t.integer "status",      default: 0
+    t.integer "list_id"
   end
 
   create_table "users", force: true do |t|

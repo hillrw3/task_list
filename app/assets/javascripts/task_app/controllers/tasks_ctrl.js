@@ -1,11 +1,12 @@
-angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', function ($scope, Task) {
+angular.module('taskApp').controller('tasksCtrl', ['$scope', 'Task', 'List', function ($scope, Task, List) {
 
     $scope.init = function init() {
       $scope.newTask = {description: ''};
 
-      Task.query().$promise.then(function(data) {
-        $scope.startedTasks = data.started || [];
-        $scope.finishedTasks = data.finished || [];
+      List.query().$promise.then(function(data) {
+        $scope.name = data.name;
+        $scope.startedTasks = data.started_tasks || [];
+        $scope.finishedTasks = data.finished_tasks || [];
       });
     };
 

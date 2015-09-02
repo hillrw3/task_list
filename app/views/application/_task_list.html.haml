@@ -1,7 +1,7 @@
 %div(ng-app="taskApp" ng-controller='tasksCtrl' ng-init='init()')
   %accordion
     %accordion-group.col-md-6.col-md-offset-3.no-padding.no-margin(is-open='true')
-      %accordion-heading Tasks
+      %accordion-heading {{name }}
       %accordion(close-others='false')
         .input-group#add-task-form
           %input.form-control#new-task(ng-model='newTask.description' placeholder='Add a new task' )

@@ -4,7 +4,7 @@ describe 'User Home Page', js: true do
   let!(:user) { create_user(username: 'bob', password: 'password') }
 
   before do
-    sign_in('bob', 'password')
+    sign_in_user('bob', 'password')
   end
 
   it 'can add a new task to a list' do
@@ -52,5 +52,20 @@ describe 'User Home Page', js: true do
     within('#started-tasks') do
       expect(page).to have_content 'learn to moonwalk'
     end
+  end
+
+  it 'has a unique task list for every user' do
+    user2 = create_user
+
+    fill_in 'new-task', with: 'shazam!'
+    page.find('#add-task').click
+
+    expect(page).to have_content 'shazam!'
+
+    click_on 'Log out'
+
+    sign_in_user(user2.username, user2.password)
+
+    expect(page).to have_no_content 'shazam!'
   end
 end

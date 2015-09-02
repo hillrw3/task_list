@@ -31,6 +31,15 @@ describe UsersController do
 
         expect(session.empty?).to be_falsey
       end
+
+      it 'creates an associated list for the user' do
+        post :create, user:user_params
+
+        user = User.last
+
+        expect(user.list).to be_a List
+        expect(user.list.user_id).to eq user.id
+      end
     end
 
     describe 'on failure' do

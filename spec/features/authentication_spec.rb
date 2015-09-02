@@ -59,7 +59,7 @@ describe 'User Authentication', js: true do
     it "returns the user to the login page and destroys the user's session" do
       user = create_user(username: 'bob', password: 'password')
 
-      sign_in(user.username, user.password)
+      sign_in_user(user.username, user.password)
 
       expect(current_path).to eq root_path
 

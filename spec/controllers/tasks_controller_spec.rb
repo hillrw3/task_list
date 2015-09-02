@@ -9,26 +9,6 @@ describe TasksController do
     end
   end
 
-  describe '#index' do
-    it 'retrieves all the tasks' do
-      create_task
-      xhr :get, :index, format: :json
-      json_response = JSON.parse(response.body)
-
-      expect(json_response.count).to eq 1
-    end
-
-    it 'retrieves and categorizes the tasks' do
-      create_task
-      create_task(status: 1)
-      xhr :get, :index, format: :json
-      json_response = JSON.parse(response.body)
-
-      expect(json_response.has_key?('started')).to be_truthy
-      expect(json_response.has_key?('finished')).to be_truthy
-    end
-  end
-
   describe '#destroy' do
     it 'deletes the given task' do
       task = create_task
