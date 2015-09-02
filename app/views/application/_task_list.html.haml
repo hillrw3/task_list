@@ -1,7 +1,7 @@
 %div(ng-app="taskApp" ng-controller='tasksCtrl' ng-init='init()')
   %accordion
     %accordion-group.col-md-6.col-md-offset-3.no-padding.no-margin(is-open='true')
-      %accordion-heading {{name }}
+      %accordion-heading {{ list.name }}
       %accordion(close-others='false')
         .input-group#add-task-form
           %input.form-control#new-task(ng-model='newTask.description' placeholder='Add a new task' )
@@ -10,20 +10,20 @@
         %accordion-group.no-padding.no-margin.primary-blue#started-tasks(is-open='true')
           %accordion-heading
             %span Started
-            %span.badge {{startedTasks.length}}
+            %span.badge {{list.started_tasks.length}}
           %table.table.table-hover.text-left
             %tbody
-              %tr(ng-repeat='task in startedTasks')
+              %tr(ng-repeat='task in list.started_tasks')
                 %td
                   %span.label.label-success.pull-right.clickable#remove-task(ng-click='finishTask(task)') Finish
                   %span {{ task.description }}
         %accordion-group.no-padding.no-margin.success-green#finished-tasks
           %accordion-heading
             %span#finished-toggle Finished
-            %span.badge {{finishedTasks.length}}
+            %span.badge {{list.finished_tasks.length}}
           %table.table.table-hover.text-left
             %tbody
-              %tr(ng-repeat='task in finishedTasks')
+              %tr(ng-repeat='task in list.finished_tasks')
                 %td
                   %span.label.label-danger.pull-right.clickable#delete-task(ng-click='deleteTask(task)') Delete
                   %span.label.label-primary.pull-right.clickable#restart-task(ng-click='restartTask(task)') Restart

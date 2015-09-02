@@ -8,7 +8,7 @@ describe 'User Home Page', js: true do
   end
 
   it 'can add a new task to a list' do
-    expect(page).to have_content 'Tasks'
+    expect(page).to have_content "bob's tasks"
     expect(page).to have_no_content 'shazam!'
     fill_in 'new-task', with: 'shazam!'
     page.find('#add-task').click
@@ -37,7 +37,7 @@ describe 'User Home Page', js: true do
   end
 
   it 'can restart a task' do
-    create_task(description: 'learn to moonwalk', status: 'finished')
+    create_task(description: 'learn to moonwalk', status: 'finished', list: user.list)
     visit '/'
 
     page.find('#finished-toggle').click
