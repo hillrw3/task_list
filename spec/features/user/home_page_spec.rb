@@ -68,4 +68,24 @@ describe 'User Home Page', js: true do
 
     expect(page).to have_no_content 'shazam!'
   end
+
+  it 'allows a user to email a task list' do
+    fill_in 'new-task', with: 'shazam!'
+    page.find('#add-task').click
+
+    page.find('#email-list').click
+
+    within '#email-modal' do
+      fill_in 'recipients', with: 'myfriend@gmail.com'
+      click_on 'Send'
+    end
+
+    sleep 0.5
+
+    email = ActionMailer::Base.deliveries.last
+
+    expect(email.subject).to eq "bob's tasks"
+    expect(email.to).to eq ['myfriend@gmail.com']
+    expect(email.body).to have_content 'shazam!'
+  end
 end

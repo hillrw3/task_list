@@ -1,0 +1,7 @@
+.text-center
+  %h4= @list.name
+  %ul
+    - @list.tasks.each do |task|
+      %li= task.description
+
+.text-warning= "List from #{@list.user.username}"

@@ -12,4 +12,20 @@ describe ListsController do
       expect(json_response['name']).to include user.username
     end
   end
+
+  describe 'POST #email' do
+    it 'sends an email to a single recipient' do
+      user = create_user
+      sign_in user
+
+      expect { xhr :post, :email, recipients: 'b@a.com', format: :json }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
+    it 'sends an email to a single recipient' do
+      user = create_user
+      sign_in user
+
+      expect { xhr :post, :email, recipients: 'b@a.com', format: :json }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
 end

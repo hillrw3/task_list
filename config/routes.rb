@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions'}
 
   resources :lists, only: :index
+  post '/email_list' => 'lists#email'
 end
