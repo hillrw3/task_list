@@ -18,14 +18,16 @@ describe ListsController do
       user = create_user
       sign_in user
 
-      expect { xhr :post, :email, recipients: 'b@a.com', format: :json }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { xhr :post, :email, recipients: ['b@a.com'], format: :json }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
 
-    it 'sends an email to a single recipient' do
+    it 'sends an email to multiple recipients' do
       user = create_user
       sign_in user
 
-      expect { xhr :post, :email, recipients: 'b@a.com', format: :json }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { xhr :post, :email, recipients: ['b@a.com', 'jimmy@johns.com'], format: :json }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      email = ActionMailer::Base.deliveries.last
+      expect(email.to).to eq ['b@a.com', 'jimmy@johns.com']
     end
   end
 end

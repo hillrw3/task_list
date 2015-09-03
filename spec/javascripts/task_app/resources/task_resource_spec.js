@@ -8,11 +8,19 @@ describe('Task', function () {
     $httpBackend = _$httpBackend_;
   }));
 
-  describe('#save', function() {
-    it('saves the task', function() {
-      $httpBackend.expectPOST('/tasks.json').respond(200);
-      Task.save();
+  describe('#finish', function() {
+    it('finishes the task', function() {
+      $httpBackend.expectPATCH('/tasks/4/finish.json').respond(200);
+      Task.finish(4);
       $httpBackend.flush();
     })
-  })
+  });
+
+  describe('#restart', function() {
+    it('restarts the task', function() {
+      $httpBackend.expectPATCH('/tasks/4/restart.json').respond(200);
+      Task.restart(4);
+      $httpBackend.flush();
+    })
+  });
 });

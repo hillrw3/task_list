@@ -4,8 +4,8 @@
   .modal-body
     form.form
       .form-group
-        input.form-control#recipients(placeholder='Enter recipient here', ng-model='recipients')
-        //p.help-block Separate recipients by a comma.
+        input.form-control#recipients(placeholder='Enter email addresses here', ng-model='recipientString')
+        p.small.help-block Separate recipients by a comma, por favor.
   .modal-footer
     button.btn.btn-danger(ng-click='cancel()') Cancel
     button.btn.btn-primary(ng-click='send()') Send

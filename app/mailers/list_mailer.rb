@@ -1,8 +1,8 @@
 class ListMailer < ActionMailer::Base
   default from: 'task@list.com'
 
-  def list(recipient, list)
+  def list(recipients, list)
     @list = list
-    mail(to: recipient, subject: @list.name)
+    mail(to: recipients, subject: @list.name)
   end
 end
