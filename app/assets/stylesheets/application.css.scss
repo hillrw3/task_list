@@ -4,17 +4,7 @@
  *= require_tree .
  */
 
-$success-green: #5cb85c;
-$primary-blue: #337ab7;
-
-.small-container {
-  width: 500px;
-}
-
-.col-centered{
-  float: none;
-  margin: 0 auto;
-}
+@import 'colors';
 
 .no-padding {
   padding: 0 !important;
@@ -35,28 +25,6 @@ $primary-blue: #337ab7;
 
 .table-hover {
   margin: 0 !important;
-}
-
-.color {
-  background-color: lightblue !important;
-}
-
-accordion .success-green .panel-heading  {
-  background-color: $success-green;
-  border-color: #4cae4c;
-
-  * {
-    color: white;
-  }
-}
-
-accordion .primary-blue .panel-heading  {
-  background-color: $primary-blue;
-  border-color: #2e6da4;
-
-  * {
-    color: white;
-  }
 }
 
 #add-task-form {

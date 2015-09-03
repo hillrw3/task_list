@@ -9,10 +9,18 @@
     .form-group
       = f.password_field :password, class: 'form-control', placeholder: 'Password'
     .form-group
-      = f.submit "Sign in", class: 'btn btn-primary col-md-12'
+      = f.submit "Sign in", class: 'btn btn-primary btn-sm col-md-12'
   %p.col-md-12.bg-danger= alert
   .sign-up.col-md-12
     .btn.btn-link.pull-right.no-padding= link_to 'Sign up', new_user_path
 
-.row.text-center
-  .col-md-6.col-md-offset-3 Sign up and start managing your tasks today!
+.row
+  .col-md-6.col-md-offset-3
+    %h5.text-center Sign up today and join the wild world of task management!
+    %p Embrace exciting features such as:
+    %ul
+      %li Adding a task (Ooooh)
+      %li Finishing a task (Aaaaaah)
+      %li Deleting a finished task (Don't need that baggage in your life)
+      %li Restarting a task (I'm never gonna quit you, task)
+      %li Emailing your task list to friends (Get all Tom Sawyer and pawn your work off on friends)
