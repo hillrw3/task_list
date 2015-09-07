@@ -1,6 +1,6 @@
-%div(ng-app="taskApp" ng-controller='tasksCtrl' ng-init='init()')
+%div(ng-controller='tasksCtrl' ng-init='init()')
   %accordion
-    %accordion-group.col-md-6.col-md-offset-3.no-padding.no-margin(is-open='true')
+    %accordion-group.no-padding.no-margin(is-open='true')
       %accordion-heading
         %span {{ list.name }}
         %a.pull-right.small#email-list(ng-click='sendEmail($event)') Email list

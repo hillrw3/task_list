@@ -69,6 +69,17 @@ describe 'User Home Page', js: true do
     expect(page).to have_no_content 'shazam!'
   end
 
+  it 'lets a user add a new list' do
+    click_on 'Add New List'
+
+    within '#new-list' do
+      fill_in 'Name', with: 'Groceries'
+      click_on 'Create'
+    end
+
+
+  end
+
   describe 'emailing lists' do
     it 'allows a user to email a task list to a single user' do
       fill_in 'new-task', with: 'shazam!'

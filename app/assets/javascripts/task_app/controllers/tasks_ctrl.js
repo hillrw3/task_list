@@ -1,11 +1,7 @@
-angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', 'List', function ($scope, $modal, Task, List) {
+angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', function ($scope, $modal, Task) {
 
     $scope.init = function init() {
       $scope.newTask = {description: ''};
-
-      List.query().$promise.then(function(data) {
-        $scope.list = data;
-      });
     };
 
     $scope.addTask = function addTask() {
@@ -56,6 +52,6 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', '
         template: JST['task_app/templates/email_modal'](),
         controller: 'emailModalCtrl'
       })
-    }
+    };
   }]
 );

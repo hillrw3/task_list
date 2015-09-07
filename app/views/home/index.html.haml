@@ -1,1 +1,7 @@
-= render 'application/task_list'
+.wrapper(ng-app="taskApp")
+  .col-md-6.col-md-offset-3(ng-controller='listsCtrl' ng-init='init()')
+    %button.btn.btn-sm.btn-primary.pull-right(ng-click='openNewListModal()') Add New List
+    %br
+    %br
+    .lists(ng-repeat='list in lists')
+      = render 'application/task_list'

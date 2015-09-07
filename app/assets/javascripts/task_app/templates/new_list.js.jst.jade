@@ -1,0 +1,10 @@
+#new-list
+  .modal-header
+    h4#email-modal-label New Task List
+  .modal-body
+    form.form
+      .form-group
+        input.form-control#name(placeholder='Name', ng-model='listName')
+  .modal-footer
+    button.btn.btn-danger(ng-click='cancel()') Cancel
+    button.btn.btn-primary(ng-click='createNewList()') Create
