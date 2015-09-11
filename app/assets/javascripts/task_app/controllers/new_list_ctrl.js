@@ -1,9 +1,10 @@
-angular.module('taskApp').controller('newListCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+angular.module('taskApp').controller('newListCtrl', ['$scope', '$modalInstance', 'List', function($scope, $modalInstance, List) {
 
   $scope.createNewList = function createNewList() {
-    var list = {name: $scope.listName};
-    $scope.lists.push(list);
-    $scope.listName = '';
+    List.save({list_name: $scope.listName}).$promise.then(function(data) {
+      $scope.lists.push(data);
+      $scope.listName = '';
+    });
     $modalInstance.dismiss();
   };
 

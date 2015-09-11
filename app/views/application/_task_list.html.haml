@@ -9,7 +9,7 @@
         .input-group#add-task-form
           %input.form-control#new-task(ng-model='newTask.description' placeholder='Add a new task' )
           .input-group-btn
-            %button.btn.btn-default#add-task(type='button' ng-click='addTask()') +
+            %button.btn.btn-default#add-task(type='button' ng-click='addTask(list)') +
         %accordion-group.no-padding.no-margin.primary-blue#started-tasks(is-open='true')
           %accordion-heading
             %span Started

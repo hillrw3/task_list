@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe UsersController do
 
+  before do
+    sign_in create_user
+  end
+
   describe 'GET #new' do
     it 'generates a new user object' do
       get :new
@@ -37,8 +41,8 @@ describe UsersController do
 
         user = User.last
 
-        expect(user.list).to be_a List
-        expect(user.list.user_id).to eq user.id
+        expect(user.lists.first).to be_a List
+        expect(user.lists.first.user_id).to eq user.id
       end
     end
 

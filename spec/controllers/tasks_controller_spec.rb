@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe TasksController do
+
+  before do
+    sign_in create_user
+  end
+
   describe '#save' do
     it 'saves the task' do
       xhr :post, :create, task: {description: 'new task'}, format: :json

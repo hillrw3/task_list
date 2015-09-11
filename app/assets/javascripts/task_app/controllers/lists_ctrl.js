@@ -1,7 +1,7 @@
 angular.module('taskApp').controller('listsCtrl', ['$scope', '$modal', 'List', function($scope, $modal, List) {
   $scope.init = function init() {
     List.query().$promise.then(function(data) {
-      $scope.lists = [data];
+      $scope.lists = data;
     });
   };
 

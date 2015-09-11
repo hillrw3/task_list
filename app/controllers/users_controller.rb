@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   attr_accessor :user
+  skip_before_filter :authenticate_user!
 
   def new
     @user = User.new

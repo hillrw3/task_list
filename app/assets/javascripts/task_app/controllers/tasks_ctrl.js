@@ -4,10 +4,10 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', f
       $scope.newTask = {description: ''};
     };
 
-    $scope.addTask = function addTask() {
+    $scope.addTask = function addTask(list) {
       if($scope.newTask.description!= '') {
-        Task.save({description: $scope.newTask.description, list_id: $scope.list.id}).$promise.then(function(data) {
-          $scope.list.started_tasks.push(data);
+        Task.save({description: $scope.newTask.description, list_id: list.id}).$promise.then(function(data) {
+          list.started_tasks.push(data);
           $scope.newTask.description = '';
         });
       }

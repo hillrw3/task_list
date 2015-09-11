@@ -2,14 +2,14 @@ require 'rails_helper'
 
 describe ListsController do
   describe 'GET #index' do
-    it "finds the current user's task list" do
+    it "returns an array of the current user's task lists" do
       user = create_user
       sign_in user
 
       xhr :get, :index, format: :json
       json_response = JSON.parse(response.body)
 
-      expect(json_response['name']).to include user.username
+      expect(json_response).to be_a Array
     end
   end
 

@@ -37,7 +37,7 @@ describe 'User Home Page', js: true do
   end
 
   it 'can restart a task' do
-    create_task(description: 'learn to moonwalk', status: 'finished', list: user.list)
+    create_task(description: 'learn to moonwalk', status: 'finished', list: user.lists.first)
     visit '/'
 
     page.find('#finished-toggle').click
