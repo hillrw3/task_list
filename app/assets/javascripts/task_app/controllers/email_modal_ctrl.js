@@ -1,6 +1,6 @@
-angular.module('taskApp').controller('emailModalCtrl', ['$scope', '$modalInstance', 'List', function ($scope, $modalInstance, List) {
+angular.module('taskApp').controller('emailModalCtrl', ['$scope', '$modalInstance', 'List', 'list', function ($scope, $modalInstance, List, list) {
   $scope.send = function send() {
-    List.email({recipients: $scope.recipients()});
+    List.email({id: list.id, recipients: $scope.recipients()});
 
     $modalInstance.dismiss();
     $scope.recipientString = undefined;

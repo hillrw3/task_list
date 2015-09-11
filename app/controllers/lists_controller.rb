@@ -7,7 +7,7 @@ class ListsController < ApplicationController
 
   def email
     recipients = params['recipients']
-    list = current_user.list
+    list = current_user.lists.find(params['id'])
     ListMailer.list(recipients, list).deliver
     render json: 200
   end

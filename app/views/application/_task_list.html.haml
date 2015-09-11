@@ -3,7 +3,7 @@
     %accordion-group.no-padding.no-margin(is-open='true')
       %accordion-heading
         %span {{ list.name }}
-        %a.pull-right.small#email-list(ng-click='sendEmail($event)') Email list
+        %a.pull-right.small#email-list(ng-click='sendEmail($event, list)') Email list
 
       %accordion(close-others='false')
         .input-group#add-task-form

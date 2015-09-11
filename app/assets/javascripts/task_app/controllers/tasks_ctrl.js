@@ -42,7 +42,7 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', f
       })
     };
 
-    $scope.sendEmail = function sendEmail(e) {
+    $scope.sendEmail = function sendEmail(e, list) {
       if (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -50,7 +50,10 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', f
 
       $modal.open({
         template: JST['task_app/templates/email_modal'](),
-        controller: 'emailModalCtrl'
+        controller: 'emailModalCtrl',
+        resolve: {
+          list: function() { return list }
+        }
       })
     };
   }]

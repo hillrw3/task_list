@@ -5,8 +5,8 @@ module ObjectCreation
     Task.create(attributes)
   end
 
-  def create_list(option={})
-    attributes = {name: "List #{rand(100)}", user: create_user}
+  def create_list(options={})
+    attributes = {name: "List #{rand(100)}", user: create_user}.merge(options)
     List.create(attributes)
   end
 

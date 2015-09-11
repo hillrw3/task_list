@@ -81,12 +81,14 @@ describe 'User Home Page', js: true do
   end
 
   describe 'emailing lists' do
-    it 'allows a user to email a task list to a single user' do
+    before do
       fill_in 'new-task', with: 'shazam!'
       page.find('#add-task').click
 
       page.find('#email-list').click
+    end
 
+    it 'allows a user to email a task list to a single user' do
       within '#email-modal' do
         fill_in 'recipients', with: 'myfriend@gmail.com'
         click_on 'Send'
@@ -102,11 +104,6 @@ describe 'User Home Page', js: true do
     end
 
     it 'allows a user to email a task list to a multiple users' do
-      fill_in 'new-task', with: 'shazam!'
-      page.find('#add-task').click
-
-      page.find('#email-list').click
-
       within '#email-modal' do
         fill_in 'recipients', with: 'myfriend@gmail.com, myotherfriend@yahoo.com'
         click_on 'Send'
