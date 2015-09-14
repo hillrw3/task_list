@@ -7,12 +7,10 @@ describe('emailModalCtrl', function () {
     $scope = $rootScope.$new();
 
     $modalInstance = _$modal_.open({
-      template: JST['task_app/templates/new_list'](),
-      controller: 'newListCtrl',
-      scope: $scope
+      template: JST['task_app/templates/email_modal']()
     });
 
-    var List = {
+    List = {
       email: function () {
         emailDeferred = $q.defer();
         return {$promise: emailDeferred.promise}
@@ -35,6 +33,21 @@ describe('emailModalCtrl', function () {
       $scope.$digest();
 
       expect($scope.recipients).toHaveBeenCalled()
+    });
+
+    it('closes the modal', function() {
+      spyOn($modalInstance, 'dismiss');
+      $scope.send();
+
+      expect($modalInstance.dismiss).toHaveBeenCalled()
+    });
+
+    it('sets the recipientString as undefined', function() {
+      $scope.recipientString = 'email@test.com, boo@yah.com';
+
+      $scope.send();
+
+      expect($scope.recipientString).toBeUndefined();
     });
   });
 });

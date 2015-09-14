@@ -11,6 +11,8 @@ angular.module('taskApp').controller('emailModalCtrl', ['$scope', '$modalInstanc
   };
 
   $scope.recipients = function recipients() {
-    return $scope.recipientString.split(', ')
+    if($scope.recipientString) {
+      return $scope.recipientString.split(', ')
+    };
   }
 }]);
