@@ -1,59 +1,64 @@
 describe('TasksCtrl', function () {
-  var $scope, $controller, Task, deferred, queryDeferred, $q;
+  var $scope, $controller, Task, deferred, finishDeferred;
 
   beforeEach(module('taskApp'));
 
-  beforeEach(inject(function (_$rootScope_, _$controller_, _Task_, _$q_) {
-    $scope = _$rootScope_.$new();
-    $controller = _$controller_;
-    $controller('tasksCtrl', {$scope: $scope, Task: Task});
-    $q = _$q_;
-    Task = _Task_;
+  beforeEach(inject(function ($rootScope, _$controller_, $q) {
+    $scope = $rootScope.$new();
 
     Task = {
       save: function () {
         deferred = $q.defer();
         return {$promise: deferred.promise};
       },
-      query: function () {
-        queryDeferred = $q.defer();
-        return {$promise: queryDeferred.promise};
+      finish: function () {
+        finishDeferred = $q.defer();
+        return {$promise: finishDeferred.promise};
       }
     };
-  }));
 
+    $controller = _$controller_;
+    $controller('tasksCtrl', {$scope: $scope, Task: Task});
+  }));
 
   describe('addTask', function() {
     it('adds a task to the "taskList"', function() {
-      expect($scope.taskList).toEqual([]);
-      $scope.newTask = 'new task';
-      $scope.addTask();
+      var list = {id: 1, started_tasks: []};
+      $scope.newTask = {description: 'new task'};
+      $scope.addTask(list);
       deferred.resolve({new: 'task'});
       $scope.$digest();
 
-      expect($scope.taskList).toEqual(['new task']);
+      expect(list.started_tasks).toEqual([{new: 'task'}]);
     });
 
     it('does not add an empty string to the list', function() {
-      $scope.newTask = '';
-      $scope.addTask();
-      expect($scope.taskList).toEqual([]);
+      var list = {id: 1, started_tasks: []};
+      $scope.newTask = {description: ''};
+      $scope.addTask(list);
+      expect(list.started_tasks).toEqual([]);
     });
 
     it('adds the task to the database', function() {
       spyOn(Task, 'save').and.callThrough();
-      $scope.newTask = 'new task';
-      $scope.addTask();
+      var list = {id: 1, started_tasks: []};
+      $scope.newTask = {description: 'pump some iron'};
+      $scope.addTask(list);
 
       expect(Task.save).toHaveBeenCalled();
     });
   });
 
-  describe('removeTask', function() {
-    it('removes the task from the taskList', function() {
-      $scope.taskList = ['Im temporary'];
-      $scope.removeTask('Im temporary');
-      expect($scope.taskList).toEqual([])
+  describe('finishTask', function() {
+    it('moves the task from the list of started tasks to the list of finished tasks', function() {
+      var task = {id: 1, status: 'started'};
+      $scope.list = {started_tasks: [task], finished_tasks: []};
+      $scope.finishTask(task);
+
+      finishDeferred.resolve();
+      $scope.$digest();
+
+      expect($scope.list).toEqual({started_tasks: [], finished_tasks: [task]});
     })
   })
 });

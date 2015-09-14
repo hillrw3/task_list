@@ -10,16 +10,18 @@ describe('Task', function () {
 
   describe('#finish', function() {
     it('finishes the task', function() {
-      $httpBackend.expectPATCH('/tasks/4/finish.json').respond(200);
-      Task.finish(4);
+      $httpBackend.expectPATCH('/tasks/4/finish').respond(200);
+      var task = {id: 4};
+      Task.finish(task);
       $httpBackend.flush();
     })
   });
 
   describe('#restart', function() {
     it('restarts the task', function() {
-      $httpBackend.expectPATCH('/tasks/4/restart.json').respond(200);
-      Task.restart(4);
+      $httpBackend.expectPATCH('/tasks/4/restart').respond(200);
+      var task = {id: 4};
+      Task.restart(task);
       $httpBackend.flush();
     })
   });
