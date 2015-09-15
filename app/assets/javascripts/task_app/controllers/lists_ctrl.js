@@ -12,4 +12,27 @@ angular.module('taskApp').controller('listsCtrl', ['$scope', '$modal', 'List', f
       scope: $scope
     })
   };
+
+  $scope.openOptionsDropdown = function openOptionsDropdown(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
+  $scope.sendEmail = function sendEmail(list) {
+    $modal.open({
+      template: JST['task_app/templates/email_modal'](),
+      controller: 'emailModalCtrl',
+      resolve: {
+        list: function() { return list }
+      }
+    })
+  };
+
+  $scope.deleteList = function deleteList(list) {
+    List.delete({id: list.id});
+    var index = $scope.lists.indexOf(list);
+    $scope.lists.splice(index);
+  };
 }]);

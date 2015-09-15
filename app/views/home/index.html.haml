@@ -4,4 +4,16 @@
     %br
     %br
     .lists(ng-repeat='list in lists')
-      = render 'application/task_list'
+      %div
+        %accordion
+          %accordion-group.no-padding.no-margin(is-open='true')
+            %accordion-heading
+              %span {{ list.name }}
+              %span(dropdown ng-click='openOptionsDropdown($event)')
+                %a#options-dropdown.small.pull-right(dropdown-toggle) Options
+                %ul.dropdown-menu#options-ul(aria-labelledby="options-dropdown")
+                  %li
+                    %a.small#email-list(ng-click='sendEmail(list)') Email
+                  %li
+                    %a.small#delete-list(ng-click='deleteList(list)') Delete
+            = render 'application/task_list'

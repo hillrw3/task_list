@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   devise_for :users, controllers: { sessions: 'sessions'}
 
-  resources :lists, only: :index
+  resources :lists, only: [:index, :create, :destroy]
   post '/email_list' => 'lists#email'
 end

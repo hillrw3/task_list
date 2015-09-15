@@ -1,11 +1,10 @@
 describe('tasksCtrl', function () {
-  var $scope, $controller, $modal, Task, deferred, finishDeferred, deleteDeferred, restartDeferred;
+  var $scope, $controller, Task, deferred, finishDeferred, deleteDeferred, restartDeferred;
 
   beforeEach(module('taskApp'));
 
-  beforeEach(inject(function ($rootScope, _$controller_, $q, _$modal_) {
+  beforeEach(inject(function ($rootScope, _$controller_, $q) {
     $scope = $rootScope.$new();
-    $modal = _$modal_;
 
     Task = {
       save: function () {
@@ -98,15 +97,5 @@ describe('tasksCtrl', function () {
 
       expect($scope.list).toEqual({started_tasks: [task], finished_tasks: []});
     });
-  });
-
-  describe('#sendEmail', function() {
-    it('opens the email modal', function() {
-      spyOn($modal, 'open');
-
-      $scope.sendEmail();
-
-      expect($modal.open).toHaveBeenCalled()
-    })
   });
 });

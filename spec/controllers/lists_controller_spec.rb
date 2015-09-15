@@ -9,13 +9,30 @@ describe ListsController do
 
   describe 'GET #index' do
     it "returns an array of the current user's task lists" do
-      user = create_user
-      sign_in user
-
       xhr :get, :index, format: :json
       json_response = JSON.parse(response.body)
 
       expect(json_response).to be_a Array
+    end
+  end
+
+  describe 'POST #create' do
+    it 'creates a new list' do
+      expect { xhr :post, :create, list: {name: 'new list'}, format: :json }.to change { List.count }.by(1)
+    end
+
+    it 'sets the current users id as the user_id' do
+      xhr :post, :create, list: {name: 'new list'}, format: :json
+
+      expect(List.last.user_id).to eq user.id
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'deletes the list' do
+      list = create_list(name: 'save me!!!')
+      expect { xhr :delete, :destroy, id: list.id, format: :json }.to change { List.count }.by(-1)
+      expect(List.find_by_name('save me!!!')).to be_nil
     end
   end
 

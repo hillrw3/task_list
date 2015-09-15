@@ -41,20 +41,5 @@ angular.module('taskApp').controller('tasksCtrl', ['$scope', '$modal', 'Task', f
         $scope.list.started_tasks.push(task)
       })
     };
-
-    $scope.sendEmail = function sendEmail(e, list) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-
-      $modal.open({
-        template: JST['task_app/templates/email_modal'](),
-        controller: 'emailModalCtrl',
-        resolve: {
-          list: function() { return list }
-        }
-      })
-    };
   }]
 );

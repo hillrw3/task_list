@@ -1,5 +1,5 @@
 describe('listsCtrl', function() {
-  var $scope, $controller, $modal, List, queryDeferred;
+  var $scope, $controller, $modal, List, queryDeferred, deleteDeferred;
 
   beforeEach(module('taskApp'));
 
@@ -11,6 +11,10 @@ describe('listsCtrl', function() {
       query: function() {
         queryDeferred = $q.defer();
         return { $promise: queryDeferred.promise }
+      },
+      delete: function() {
+        deleteDeferred = $q.defer();
+        return { $promise: deleteDeferred.promise }
       }
     };
 
@@ -37,5 +41,36 @@ describe('listsCtrl', function() {
 
       expect($modal.open).toHaveBeenCalled();
     })
-  })
+  });
+
+  describe('#sendEmail', function() {
+    it('opens the email modal', function() {
+      spyOn($modal, 'open');
+
+      $scope.sendEmail();
+
+      expect($modal.open).toHaveBeenCalled()
+    })
+  });
+
+  describe('#deleteList', function () {
+    it('removes the list for $scope.lists', function() {
+      var list = {id:1, name: 'Astronaut Gear'};
+      $scope.lists = [list];
+
+      $scope.deleteList(list);
+
+      expect($scope.lists).toEqual([])
+    });
+
+    it('calls List#delete', function() {
+      spyOn(List, 'delete');
+      var list = {id:1, name: 'Astronaut Gear'};
+      $scope.lists = [list];
+
+      $scope.deleteList(list);
+
+      expect(List.delete).toHaveBeenCalled();
+    })
+  });
 });

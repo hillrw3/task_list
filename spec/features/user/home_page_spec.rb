@@ -69,53 +69,63 @@ describe 'User Home Page', js: true do
     expect(page).to have_no_content 'shazam!'
   end
 
-  it 'lets a user add a new list' do
-    click_on 'Add New List'
+  describe 'List Management' do
+    it 'lets a user add a new list' do
+      click_on 'Add New List'
 
-    within '#new-list' do
-      fill_in 'Name', with: 'Groceries'
-      click_on 'Create'
+      within '#new-list' do
+        fill_in 'Name', with: 'Groceries'
+        click_on 'Create'
+      end
     end
 
+    describe 'emailing lists' do
+      before do
+        fill_in 'new-task', with: 'shazam!'
+        page.find('#add-task').click
 
-  end
-
-  describe 'emailing lists' do
-    before do
-      fill_in 'new-task', with: 'shazam!'
-      page.find('#add-task').click
-
-      page.find('#email-list').click
-    end
-
-    it 'allows a user to email a task list to a single user' do
-      within '#email-modal' do
-        fill_in 'recipients', with: 'myfriend@gmail.com'
-        click_on 'Send'
+        page.find('#options-dropdown').click
+        page.find('#email-list').click
       end
 
-      sleep 0.5
+      it 'allows a user to email a task list to a single user' do
+        within '#email-modal' do
+          fill_in 'recipients', with: 'myfriend@gmail.com'
+          click_on 'Send'
+        end
 
-      email = ActionMailer::Base.deliveries.last
+        sleep 0.5
 
-      expect(email.subject).to eq "bob's tasks"
-      expect(email.to).to eq ['myfriend@gmail.com']
-      expect(email.body).to have_content 'shazam!'
-    end
+        email = ActionMailer::Base.deliveries.last
 
-    it 'allows a user to email a task list to a multiple users' do
-      within '#email-modal' do
-        fill_in 'recipients', with: 'myfriend@gmail.com, myotherfriend@yahoo.com'
-        click_on 'Send'
+        expect(email.subject).to eq "bob's tasks"
+        expect(email.to).to eq ['myfriend@gmail.com']
+        expect(email.body).to have_content 'shazam!'
       end
 
-      sleep 0.5
+      it 'allows a user to email a task list to a multiple users' do
+        within '#email-modal' do
+          fill_in 'recipients', with: 'myfriend@gmail.com, myotherfriend@yahoo.com'
+          click_on 'Send'
+        end
 
-      email = ActionMailer::Base.deliveries.last
+        sleep 0.5
 
-      expect(email.subject).to eq "bob's tasks"
-      expect(email.to).to eq ['myfriend@gmail.com', 'myotherfriend@yahoo.com']
-      expect(email.body).to have_content 'shazam!'
+        email = ActionMailer::Base.deliveries.last
+
+        expect(email.subject).to eq "bob's tasks"
+        expect(email.to).to eq ['myfriend@gmail.com', 'myotherfriend@yahoo.com']
+        expect(email.body).to have_content 'shazam!'
+      end
+    end
+
+    it 'can delete a list' do
+      expect(page).to have_content "bob's tasks"
+
+      page.find('#options-dropdown').click
+      page.find('#delete-list').click
+
+      expect(page).to have_no_content "bob's tasks"
     end
   end
 end
